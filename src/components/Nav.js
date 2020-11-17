@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMusic } from '@fortawesome/free-solid-svg-icons'
+import { faMusic ,faWindowClose} from '@fortawesome/free-solid-svg-icons'
 
 
 function Nav({setLibraryStatus,libraryStatus}) {
@@ -8,8 +8,9 @@ function Nav({setLibraryStatus,libraryStatus}) {
         <nav>
             <h1>Waves</h1>
             <button onClick={()=>setLibraryStatus(!libraryStatus)}>
-                Library
-                <FontAwesomeIcon  icon={faMusic}/>
+                {libraryStatus?'Close ':'Library '} 
+
+                <FontAwesomeIcon  icon={libraryStatus?faWindowClose:faMusic} />
             </button>
             
         </nav>
