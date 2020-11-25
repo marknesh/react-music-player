@@ -1,11 +1,40 @@
 import React, {  useRef, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlay,faAngleLeft,faAngleRight,faPause} from '@fortawesome/free-solid-svg-icons'
+import { faPlay,faAngleLeft,faAngleRight,faPause,faVolumeMute, faVolumeOff} from '@fortawesome/free-solid-svg-icons'
 
 function Player({currentSong,setIsPlaying,isPlaying,songs,setSongs,setCurrentSong}) {
  
+    const [volume,setVolume]=useState(60)
+    const [mute,setMute]=useState(false)
+    const [prevVolume,setPrevVolume]=useState(volume)
 
     const audioRef=useRef(null)
+
+
+    const handleMute =(e)=>{
+        if(mute){
+            var currentVolume=prevVolume / 100;          
+            audioRef.current.volume=currentVolume;
+            setVolume(prevVolume);
+            setMute(false);
+
+        }
+        else{
+            setPrevVolume(volume)
+            audioRef.current.volume = 0
+            setMute(true)          
+            setVolume(0)
+            
+
+        }
+    }
+
+    const handleVolumeChange=(e)=>{
+        const volumeLevel = e.target.value /100 ;
+        audioRef.current.volume=volumeLevel
+        setVolume(e.target.value)
+    }
+
 
     const activeLibraryHandler=(prevnext)=>{
 
@@ -116,6 +145,14 @@ const songEndHandler=()=>{
     const trackANimation={
         transform:`translateX(${songInfo.animationPercentage}%)`
     }
+    const trackAnim = {
+        track: {
+            transform: `translateX(${songInfo.animationPercentage}%)`,
+        },
+        volume: {
+            transform: `translateX(${volume}%)`,
+        },
+    }
     return (
         <div className="player">
          
@@ -132,6 +169,25 @@ const songEndHandler=()=>{
                 
                 <p>{songInfo?getTime(songInfo.duration||0):"0.00"}</p>
             </div>
+            <div className="volume">
+            <div className="volume-control">
+     
+                <div className="volume-track">
+                
+                    <input type="range" min={0} value={volume} onChange={handleVolumeChange} max={100}/>
+
+                    <div className="volume-animate" style={trackAnim.volume}></div>
+
+                </div>
+                
+            
+
+            </div>
+           <div className="muteIcon">
+            <FontAwesomeIcon size="1.5x" onClick={handleMute}  icon={mute ? faVolumeMute:faVolumeOff}/>
+            </div>
+        
+            </div>
             <div className="play-control">
                <FontAwesomeIcon onClick={()=>skipTrackHandler('skip-back')} className="skip-back"  size="2x" icon={faAngleLeft} />
                <FontAwesomeIcon onClick={playSongHandler} className="play" size="2x" icon={isPlaying?faPause:faPlay} />
@@ -143,5 +199,7 @@ const songEndHandler=()=>{
         </div>
     )
 }
+
+
 
 export default Player

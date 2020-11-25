@@ -38,7 +38,7 @@
 input[type="range"]:focus {
     outline: none;
   }
-  input[type="range"]::-webkit-slider-thumb {
+input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     height: 16px;
     width: 16px;
@@ -66,12 +66,77 @@ input[type="range"]:focus {
     pointer-events: none;
   }
 
+
+  .volume-control{
+    width: 30%;
+    input{
+      width: 100%;
+      -webkit-appearance: none;
+      background: transparent;
+      cursor: pointer;
+      opacity: 0;
+     
+    }
+    
+  }
+
+  svg{
+    cursor: pointer;
+  }
+  .volume-track{
+    height: 0.9rem;
+    background-color: blueviolet;
+    border-radius: 1rem;
+    width:100%;
+    position: relative;
+    overflow: hidden;
+   
+  }
+
+  .volume-animate{
+    background: rgb(204, 204, 204);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateX(0%);
+    padding: 1rem;
+    pointer-events: none;
+   
+  }
+
+  .volume{
+    display: flex;
+    width: 60%;
+    align-items: center;
+    justify-content: center;
+    padding: 3px;
+
+    input{
+      width: 100%;
+    }
+
+  
+   
+  }
+
+  .muteIcon{
+    padding: 10px;
+  }
+
+  
+
   @media screen and (max-width:768px){
       .time-control{
           width: 90%;
       }
       .play-control{
           width: 70%;
+      }
+
+      .volume{
+        width: 100%;
       }
 
   }

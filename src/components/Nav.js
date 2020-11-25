@@ -3,16 +3,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMusic ,faWindowClose} from '@fortawesome/free-solid-svg-icons'
 
 
+
 function Nav({setLibraryStatus,libraryStatus}) {
     return (
         <nav>
+            
             <h1>Waves</h1>
             <button onClick={()=>setLibraryStatus(!libraryStatus)}>
                 {libraryStatus?'Close ':'Library '} 
 
                 <FontAwesomeIcon  icon={libraryStatus?faWindowClose:faMusic} />
             </button>
-            
+          
+  
+           
+ 
         </nav>
     )
 }
