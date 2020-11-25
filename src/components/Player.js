@@ -184,7 +184,7 @@ const songEndHandler=()=>{
 
             </div>
            <div className="muteIcon">
-            <FontAwesomeIcon size="1.5x" onClick={handleMute}  icon={mute ? faVolumeMute:faVolumeOff}/>
+            <FontAwesomeIcon size="1x" onClick={handleMute}  icon={mute ? faVolumeMute:faVolumeOff}/>
             </div>
         
             </div>
