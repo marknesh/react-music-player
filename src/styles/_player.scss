@@ -35,8 +35,19 @@
     }
   }
 
-  input:hover{
-    opacity: 1;
+  .repeat-control {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding-top: -20px;
+    padding-bottom: 20px;
+  
+    width: 40%;
+  
+  }
+  
+  .repeat{
+    color: lightgrey;
   }
 
 
@@ -139,6 +150,10 @@ input[type="range"]::-webkit-slider-thumb {
       .play-control{
           width: 70%;
       }
+      .repeat-control{
+        width: 70%;
+    }
+
 
       .volume{
         width: 100%;

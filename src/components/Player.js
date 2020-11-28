@@ -1,14 +1,30 @@
 import React, {  useRef, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlay,faAngleLeft,faAngleRight,faPause,faVolumeMute, faVolumeOff} from '@fortawesome/free-solid-svg-icons'
+import { faPlay,faAngleLeft,faAngleRight,faPause,faVolumeMute, faVolumeOff,faRandom,faBackward} from '@fortawesome/free-solid-svg-icons'
 
 function Player({currentSong,setIsPlaying,isPlaying,songs,setSongs,setCurrentSong}) {
  
     const [volume,setVolume]=useState(60)
     const [mute,setMute]=useState(false)
     const [prevVolume,setPrevVolume]=useState(volume)
+    const [repeat,setRepeat]=useState(false)
+    const [shuffle,setShuffle]=useState(false)
 
     const audioRef=useRef(null)
+
+    const handleShuffle=()=>{
+        setShuffle(!shuffle)
+        setRepeat(false)
+    
+    }
+
+    const handleRepeat=()=>{
+        setRepeat(!repeat)  
+        setShuffle(false) 
+
+        
+
+    }
 
 
     const handleMute =(e)=>{
@@ -111,9 +127,36 @@ const autoPlayHandler=(e)=>{
 }
 
 const songEndHandler=()=>{
+    if(repeat){
+     
+     audioRef.current.currentTime = 0
+     if(isPlaying){
+       audioRef.current.play()
+     }
+     
+
+    }
+    else if(shuffle){
+        
+        let newIndex = 0;
+        newIndex=Math.floor(Math.random() * (songs.length))
+        console.log(newIndex)
+      
+        activeLibraryHandler(songs[newIndex])
+      
+        setCurrentSong(songs[newIndex]); 
+        autoPlayHandler()
+      
+       
+      
+        
+    }
+    else{
     let currentIndex = songs.findIndex((song) => song.id === currentSong.id);
     let nextSong = (currentIndex + 1) % songs.length;
     setCurrentSong(songs[nextSong]); 
+    activeLibraryHandler(songs[nextSong])
+    }
 
 
 }
@@ -193,6 +236,10 @@ const songEndHandler=()=>{
                <FontAwesomeIcon onClick={playSongHandler} className="play" size="2x" icon={isPlaying?faPause:faPlay} />
                 <FontAwesomeIcon  onClick={()=>skipTrackHandler('skip-forward')}className="sjip-forward" size="2x" icon={faAngleRight} />
 
+            </div>
+            <div className="repeat-control">
+                <FontAwesomeIcon size="2x" style={shuffle?{color:'red'}:{color:''}}  className="repeat" onClick={handleShuffle} icon={faRandom} />
+                <FontAwesomeIcon size="2x" style={repeat?{color:'red'}:{color:''}}  className="repeat" onClick={handleRepeat} icon={faBackward} />
             </div>
             <audio onLoadedMetadata={timeUpdateHandler} onLoadedData={autoPlayHandler} onEnded={songEndHandler}  onTimeUpdate={timeUpdateHandler} ref={audioRef} src={currentSong.audio}/>
             
