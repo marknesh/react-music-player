@@ -9,12 +9,23 @@ function Player({currentSong,setIsPlaying,isPlaying,songs,setSongs,setCurrentSon
     const [prevVolume,setPrevVolume]=useState(volume)
     const [repeat,setRepeat]=useState(false)
     const [shuffle,setShuffle]=useState(false)
+    const [shuffleList,setShuffleList]=useState([])
 
     const audioRef=useRef(null)
 
     const handleShuffle=()=>{
         setShuffle(!shuffle)
         setRepeat(false)
+         
+        setShuffleList([...shuffleList,Math.floor(Math.random() * (songs.length))])
+        
+     
+       /*  activeLibraryHandler(songs[newIndex]) */
+      
+       
+        autoPlayHandler()
+      
+       
     
     }
 
@@ -138,13 +149,22 @@ const songEndHandler=()=>{
     }
     else if(shuffle){
         
-        let newIndex = 0;
-        newIndex=Math.floor(Math.random() * (songs.length))
-        console.log(newIndex)
       
-        activeLibraryHandler(songs[newIndex])
+      setShuffleList([...shuffleList,Math.floor(Math.random() * (songs.length))])
+    
+
+      if(shuffleList[shuffleList.length-1] === shuffleList[shuffleList.length-2]||shuffleList[shuffleList.length-1] === shuffleList[shuffleList.length-3] ){
+        setCurrentSong(songs[Math.floor(Math.random() * (songs.length))])
+    }
+    else{
+      setCurrentSong(songs[shuffleList[shuffleList.length-1]])
+    }
       
-        setCurrentSong(songs[newIndex]); 
+   
+    
+       /*  activeLibraryHandler(songs[newIndex]) */
+      
+       
         autoPlayHandler()
       
        
