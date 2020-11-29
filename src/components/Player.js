@@ -1,6 +1,6 @@
 import React, {  useRef, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlay,faAngleLeft,faAngleRight,faPause,faVolumeMute, faVolumeOff,faRandom,faBackward} from '@fortawesome/free-solid-svg-icons'
+import { faPlay,faAngleLeft,faAngleRight,faPause,faVolumeMute, faVolumeOff,faRandom,faHistory} from '@fortawesome/free-solid-svg-icons'
 
 function Player({currentSong,setIsPlaying,isPlaying,songs,setSongs,setCurrentSong}) {
  
@@ -266,7 +266,7 @@ const songEndHandler=()=>{
             </div>
             <div className="repeat-control">
                 <FontAwesomeIcon size="2x" style={shuffle?{color:'red'}:{color:''}}  className="repeat" onClick={handleShuffle} icon={faRandom} />
-                <FontAwesomeIcon size="2x" style={repeat?{color:'red'}:{color:''}}  className="repeat" onClick={handleRepeat} icon={faBackward} />
+                <FontAwesomeIcon size="2x" style={repeat?{color:'red'}:{color:''}}  className="repeat" onClick={handleRepeat} icon={faHistory} />
             </div>
             <audio onLoadedMetadata={timeUpdateHandler} onLoadedData={autoPlayHandler} onEnded={songEndHandler}  onTimeUpdate={timeUpdateHandler} ref={audioRef} src={currentSong.audio}/>
             

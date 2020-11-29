@@ -18,7 +18,7 @@
 
 }
 
-@media screen and (max-width:768px){
+@media screen and (max-width:480px){
     .song-container{
     img{
         width: 60%;
@@ -26,6 +26,14 @@
 }
 }
 
+
+@media screen and (min-width:481px) and (max-width:768px){
+    .song-container{
+        img{
+            width: 30%;
+        }
+    }
+  }
 .song-playing{
     animation:  rotate 10s infinite linear;
 }
