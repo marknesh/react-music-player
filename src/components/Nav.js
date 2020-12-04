@@ -7,7 +7,7 @@ import { auth } from '../firebase';
 
 
 function Nav({setLibraryStatus,libraryStatus}) {
-    const [{user}]=useStateValue()
+    const {user}=useStateValue()
     const logout=(e)=>{
         e.preventDefault()
         auth.signOut()
@@ -16,17 +16,17 @@ function Nav({setLibraryStatus,libraryStatus}) {
 
     }
     return (
-        <nav>
+        <nav className="mb-3">
         
             <h1>Waves</h1>
-            <button onClick={()=>setLibraryStatus(!libraryStatus)}>
+            <button className="but" onClick={()=>setLibraryStatus(!libraryStatus)}>
                 {libraryStatus?'Close ':'Library '} 
 
                 <FontAwesomeIcon  icon={libraryStatus?faWindowClose:faMusic} />
             </button>
 
    
-            {user && <button onClick={(e)=>logout(e)}>Logout</button>}
+            {user && <button className="but" onClick={(e)=>logout(e)}>Logout</button>}
           
   
            

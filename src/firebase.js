@@ -17,6 +17,7 @@ import 'firebase/auth'
 
   const db=app.firestore()
   const auth=app.auth()
+  
 
   const provider=new firebase.auth.GoogleAuthProvider();
 
