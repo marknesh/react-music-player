@@ -70,7 +70,7 @@ function Login() {
             </Card>
             <div className="w-100 text-center mt-3 ">
 
-               <div> Register an account? <Link to="/signup">Signup</Link></div>
+               <div> Need an account? <Link to="/signup">Signup</Link></div>
                 <Button className="mt-4" onClick={signIn}>SIGN IN WITH GOOGLE</Button>
             </div>
            
