@@ -21,6 +21,7 @@ import Switch from "react-bootstrap/esm/Switch";
 
 
 
+
 function App() {
  
   
@@ -58,6 +59,7 @@ function App() {
       />
   <Library songs={songs} libraryStatus={libraryStatus} setSongs={setSongs} setCurrentSong={setCurrentSong}/>
   </PrivateRoute2>
+ 
   
 
 
@@ -68,14 +70,18 @@ function App() {
 
 
       <PrivateRoute path="/login" exact component={Login} />
-     
+      
+
     
    
       </Switch>
 
+
+      
+      
+
     
   
-    <Redirect to="/" />
     
    
       </Router>

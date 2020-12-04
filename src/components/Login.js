@@ -28,10 +28,7 @@ function Login() {
        })
       
         
-        .catch(error=>{
-            setLoading(false)
-            setError(error.message)
-        })
+   
       
 
         }
@@ -47,7 +44,7 @@ function Login() {
         <Container className="d-flex justify-content-center align-items-center" style={{minHeight:'100vh'}}>
         <div style={{width:'100vw',maxWidth:'400px'}}>
         <div className="login">
-            <Card>
+            <Card className="card">
                 <Card.Body>
                     <h1 className="text-center mb-4">Login</h1>
     {error && <Alert variant="danger">{error}</Alert>}

@@ -16,7 +16,7 @@ function Nav({setLibraryStatus,libraryStatus}) {
 
     }
     return (
-        <nav className="mb-3">
+        <nav>
         
             <h1>Waves</h1>
             <button className="but" onClick={()=>setLibraryStatus(!libraryStatus)}>

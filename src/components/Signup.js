@@ -2,20 +2,20 @@ import React, { useRef, useState } from 'react'
 
 
 import {Card, Form, FormControl,Button, Alert, Container} from 'react-bootstrap'
-import { NavLink, Redirect, useHistory } from 'react-router-dom'
+import { NavLink} from 'react-router-dom'
 import { auth } from '../firebase'
+
 import { useStateValue } from '../StateProvider'
 
 
 function Signup() {
     const [error,setError]=useState('')
-    const {signUp,setUser}=useStateValue()
+    const {signUp}=useStateValue()
     const emailRef=useRef()
     const passwordRef=useRef()
     const passwordConfirmRef=useRef()
     const [loading,setLoading]=useState(false)
-    const history=useHistory()
-
+   
     const handleSignup=async(e)=>{
         e.preventDefault()
         setLoading(true)
@@ -29,6 +29,7 @@ function Signup() {
        await signUp(emailRef.current.value,passwordRef.current.value)
      
        .then(()=>{
+           auth.currentUser.sendEmailVerification()
            
         
    
