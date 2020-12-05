@@ -1,8 +1,8 @@
 {
-  "homepage": "https://marknesh.github.io/react-music-player",
   "name": "react-player",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://marknesh.github.io/react-music-player",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
     "@fortawesome/free-solid-svg-icons": "^5.15.1",

@@ -30,7 +30,9 @@ nav{
 
 @media screen and (max-width:768px){
     nav{
-        margin-bottom: 0px;
+        min-height: 2vh;
+        margin: 0px;
+        padding-top: 10px;
         button{
             z-index: 100;
         }

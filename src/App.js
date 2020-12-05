@@ -9,7 +9,7 @@ import Nav from "./components/Nav";
 import Login from "./components/Login";
 
 
-import { BrowserRouter as Router, Redirect} from "react-router-dom";
+import { BrowserRouter as Router} from "react-router-dom";
 import Signup from "./components/Signup";
 import PrivateRoute from "./components/PrivateRoute";
 import PrivateRoute2 from "./components/PrivateRoute2";
@@ -42,7 +42,7 @@ function App() {
   return (
        
     <div className={`app ${libraryStatus ? 'library-active':''}`}>
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
         <Switch>
           
       
