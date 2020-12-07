@@ -14,6 +14,7 @@ import Signup from "./components/Signup";
 import PrivateRoute from "./components/PrivateRoute";
 import PrivateRoute2 from "./components/PrivateRoute2";
 import Switch from "react-bootstrap/esm/Switch";
+import ForgotPassword from "./components/ForgotPassword";
 
 
 
@@ -42,7 +43,7 @@ function App() {
   return (
        
     <div className={`app ${libraryStatus ? 'library-active':''}`}>
-      <Router basename={process.env.PUBLIC_URL}>
+      <Router >
         <Switch>
           
       
@@ -57,6 +58,7 @@ function App() {
       
       
       />
+    
   <Library songs={songs} libraryStatus={libraryStatus} setSongs={setSongs} setCurrentSong={setCurrentSong}/>
   </PrivateRoute2>
  
@@ -65,7 +67,7 @@ function App() {
 
 
       <PrivateRoute path="/signup" exact component={Signup} />
-     
+      <PrivateRoute path="/forgot-password" component={ForgotPassword} />
   
 
 

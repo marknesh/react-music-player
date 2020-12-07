@@ -29,6 +29,10 @@ export const StateProvider=({children})=>{
         )
 
     }
+
+    const resetPassword=(email)=>{
+        return auth.sendPasswordResetEmail(email)
+    }
     const login=(email,password)=>{
         return auth.signInWithEmailAndPassword(email,password)
     }
@@ -46,7 +50,8 @@ export const StateProvider=({children})=>{
         user,
         signUp,
         login,
-        setUser
+        setUser,
+        resetPassword
 
     }
     return <StateContext.Provider value={value

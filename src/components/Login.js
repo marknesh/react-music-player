@@ -69,6 +69,7 @@ function Login() {
                 </Card.Body>
             </Card>
             <div className="w-100 text-center mt-3 ">
+            <div><Link to="/forgot-password">Forgot password?</Link></div>
 
                <div> Need an account? <Link to="/signup">Signup</Link></div>
                 <Button className="mt-4" onClick={signIn}>SIGN IN WITH GOOGLE</Button>
