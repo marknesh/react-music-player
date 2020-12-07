@@ -60,7 +60,7 @@ function Login() {
 
          }
          else if(err.code === 'auth/user-not-found'){
-            return setError('Sorry user does not exist')
+            return setError('Sorry user does not exist. Please signup')
          }
          else if(err.code === 'auth/wrong-password'){
             return setError('invalid email or password')

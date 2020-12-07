@@ -12,7 +12,7 @@ function ForgotPassword() {
     const [error,setError]=useState()
     const [sent,setSent]=useState()
     const [loading,setLoading]=useState(false)
-    const [input,setInput]=useState()
+   
 
     const handleReset=async(e)=>{
         e.preventDefault()
@@ -23,15 +23,27 @@ function ForgotPassword() {
         .then(()=>{
             setLoading(false)
             setSent('password reset link has been sent to your email')
-            setInput('')
+            
             
 
         }
             
         )
         .catch((err)=>{
+            setSent('')
             setLoading(false)
-            setError(err.message)
+            if(err.code === 'auth/invalid-email'){
+                return  setError('Please enter a valid email address')
+     
+              }
+              else if(err.code === 'auth/user-not-found'){
+                 return setError('Sorry user does not exist. Please signup')
+              }
+            
+              else{
+                
+                 setError(err.message)
+              }
         })
 
         }
@@ -54,7 +66,7 @@ function ForgotPassword() {
                     <Form onSubmit={handleReset}>
                         <Form.Group id="reset-password">
                             <Form.Label>Enter email address</Form.Label>
-                            <FormControl type="input" value={input} onChange={(e)=>setInput(e.target.value)} ref={emailRef} required/>
+                            <FormControl type="input" ref={emailRef} required/>
                         </Form.Group>
 
                         <Button type="submit" disabled={loading} >Reset password</Button>
