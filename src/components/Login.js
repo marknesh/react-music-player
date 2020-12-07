@@ -1,32 +1,76 @@
-import React,{useRef,useState} from 'react'
+import React,{ useEffect, useRef,useState} from 'react'
 import {Card, Form, FormControl,Button, Alert, Container} from 'react-bootstrap'
 import { useStateValue } from '../StateProvider'
 import { Link, useHistory } from 'react-router-dom'
 
 
+
 function Login() {
-    const {signIn}=useStateValue()
+   
     const [error,setError]=useState('')
-    const {login}=useStateValue()
+    const {login,noUserError,signIn,setNoUserError}=useStateValue()
     const emailRef=useRef()
     const passwordRef=useRef()
     const history=useHistory()
     const [loading,setLoading]=useState(false)
+
+    useEffect(()=>{
+
+
+        return (()=>  setNoUserError(''))
+
+    },[setNoUserError])
+
+
+    const googleSignIn=async()=>{
+        await signIn()
+
+    }
+
+ 
     const handleLogin=async(e)=>{
         e.preventDefault()
         setLoading(true)
         setError('')
 
+        
+
+        
+     
+        
     
 
         try{
+            
        await login(emailRef.current.value,passwordRef.current.value)
        .then(()=>{
         history.push('/')
      
 
        })
-      
+      .catch(err=>{
+         setLoading(false)
+         
+        
+
+         
+         if(err.code === 'auth/invalid-email'){
+           return  setError('Please enter a valid email address')
+
+         }
+         else if(err.code === 'auth/user-not-found'){
+            return setError('Sorry user does not exist')
+         }
+         else if(err.code === 'auth/wrong-password'){
+            return setError('invalid email or password')
+         }
+         else{
+           
+            setError(err.message)
+         }
+        
+         
+      })
         
    
       
@@ -34,7 +78,7 @@ function Login() {
         }
         catch{
             setLoading(false)
-            setError('incorrect email or password')
+            setError('failed to login')
 
         }
 
@@ -48,6 +92,7 @@ function Login() {
                 <Card.Body>
                     <h1 className="text-center mb-4">Login</h1>
     {error && <Alert variant="danger">{error}</Alert>}
+    {noUserError && <Alert variant="danger">{noUserError}</Alert>}
                     <Form onSubmit={handleLogin}>
                         <Form.Group id="email">
                             <Form.Label>Email</Form.Label>
@@ -72,7 +117,7 @@ function Login() {
             <div><Link to="/forgot-password">Forgot password?</Link></div>
 
                <div> Need an account? <Link to="/signup">Signup</Link></div>
-                <Button className="mt-4" onClick={signIn}>SIGN IN WITH GOOGLE</Button>
+                <Button className="mt-4" onClick={googleSignIn}>SIGN IN WITH GOOGLE</Button>
             </div>
            
             

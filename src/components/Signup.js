@@ -38,8 +38,16 @@ function Signup() {
        })   
       
        .catch((err)=>{
-           setError(err.message)
-           setLoading(false)
+        setLoading(false)
+          
+           if(err.code === 'auth/invalid-email'){
+            return  setError('Please enter a valid email address')
+ 
+          }
+          else{
+          setError(err.message)
+          }
+          
        })       
       
        
