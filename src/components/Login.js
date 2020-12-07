@@ -50,6 +50,7 @@ function Login() {
        })
       .catch(err=>{
          setLoading(false)
+         setNoUserError('')
          
         
 
@@ -78,6 +79,7 @@ function Login() {
         }
         catch{
             setLoading(false)
+            setNoUserError('')
             setError('failed to login')
 
         }
