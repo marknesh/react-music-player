@@ -1,4 +1,5 @@
 import { createContext,  useContext, useEffect, useState } from "react";
+import Loading from "./components/Loading";
 import { auth, provider } from "./firebase";
 
 
@@ -107,6 +108,7 @@ export const StateProvider=({children})=>{
       
 
     }>
+        {loading && <Loading/>}
         {!loading && children}
     </StateContext.Provider>
 }
