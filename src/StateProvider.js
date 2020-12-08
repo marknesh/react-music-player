@@ -37,12 +37,16 @@ export const StateProvider=({children})=>{
     },[waiting])
 
     const signIn=()=>{
-        setWaiting((true))
+        
         setNoUserError('')
+        try{
         auth.signInWithPopup(provider)
-        .then((async(result)=>{            
+
+      
+        .then(((result)=>{  
+            setWaiting(true)          
             auth.fetchSignInMethodsForEmail(result.user.email)
-            .then(async(result)=>{ 
+            .then((result)=>{ 
                 setWaiting(false)
                 
                 if(result.includes("password")){
@@ -50,7 +54,7 @@ export const StateProvider=({children})=>{
                 }
                 else{
                     setUser(null)
-                    await auth.signOut()
+                     auth.signOut()
                     setNoUserError("No user with that account exists. Please sign up")
                     
                    
@@ -63,6 +67,15 @@ export const StateProvider=({children})=>{
             })
         }))
 
+        .catch(err=>{
+            if(err.code==="auth/popup-closed-by-user")
+            setWaiting(false)
+        })
+    }
+    catch{
+        setWaiting(false)
+
+    }
         
         
         
